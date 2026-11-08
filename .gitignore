@@ -1,0 +1,30 @@
+# Environnement
+.env
+.env.*
+!.env.example
+
+# Node / React
+node_modules/
+dist/
+build/
+coverage/
+
+# .NET
+**/bin/
+**/obj/
+.vs/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Fichiers sensibles
+*.pfx
+*.key
