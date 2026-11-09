@@ -20,5 +20,22 @@ services:
       timeout: 5s
       retries: 10
 
+  api:
+    build:
+      context: ./backend
+    restart: unless-stopped
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT:-Development}
+      # "db" = nom du service, résolu par le réseau interne de Compose
+      ConnectionStrings__Default: Host=db;Port=5432;Database=ter_db;Username=ter_user;Password=${DB_PASSWORD}
+
+    ports:
+      - "${API_PORT:-8080}:8080"
+
 volumes:
   postgres_data:
