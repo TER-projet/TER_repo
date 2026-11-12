@@ -1,24 +1,28 @@
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using Ter.Infrastructure.Persistence;
+using Ter.Api.Data;
+using Ter.Api.Extensions;
+using Ter.Api.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
-
+// Base de données PostgreSQL (chaîne de connexion "Default", voir README)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+// Controllers + validation automatique des requêtes (dossier Validators/)
+builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
+builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
+// Services métier : enregistrés automatiquement (dossier Services/)
+builder.Services.AddBusinessServices();
+
+// Réponses d'erreur standardisées (format ProblemDetails)
+builder.Services.AddProblemDetails();
+
 var app = builder.Build();
 
+app.UseExceptionHandler();
 app.MapControllers();
-
-app.MapGet("/health", async (AppDbContext db, CancellationToken ct) =>
-{
-    var canConnect = await db.Database.CanConnectAsync(ct);
-
-    return canConnect
-        ? Results.Ok(new { status = "healthy", database = "up" })
-        : Results.Json(new { status = "unhealthy", database = "down" }, statusCode: StatusCodes.Status503ServiceUnavailable);
-});
 
 app.Run();
