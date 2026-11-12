@@ -6,9 +6,11 @@ using Ter.Api.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Base de données PostgreSQL (chaîne de connexion "Default", voir README)
+// Base de données PostgreSQL (chaîne de connexion "Default")
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
+
+builder.Services.AddIdentityServices();
 
 // Controllers + validation automatique des requêtes (dossier Validators/)
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
