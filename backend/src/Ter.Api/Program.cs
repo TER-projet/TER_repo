@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddIdentityServices();
+builder.Services.AddJwtAuthentication(builder.Configuration);
 
 // Controllers + validation automatique des requêtes (dossier Validators/)
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>());
@@ -25,6 +26,8 @@ builder.Services.AddProblemDetails();
 var app = builder.Build();
 
 app.UseExceptionHandler();
+app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
