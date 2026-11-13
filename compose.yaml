@@ -34,6 +34,8 @@ services:
       # "db" = nom du service, résolu par le réseau interne de Compose
       ConnectionStrings__Default: Host=db;Port=5432;Database=ter_db;Username=ter_user;Password=${DB_PASSWORD}
       Jwt__Key: ${JWT_KEY:?JWT_KEY is required}
+      Admin__Email: ${ADMIN_EMAIL:-admin@crous.local}
+      Admin__Password: ${ADMIN_PASSWORD:?ADMIN_PASSWORD is required}
 
     ports:
       - "${API_PORT:-8080}:8080"

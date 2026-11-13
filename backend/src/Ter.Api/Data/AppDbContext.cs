@@ -18,12 +18,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
         base.OnModelCreating(modelBuilder);
 
         // Noms de tables conformes aux conventions du projet (minuscules, snake_case)
-        modelBuilder.Entity<AppUser>().ToTable("utilisateurs");
+        modelBuilder.Entity<AppUser>().ToTable("comptes");
         modelBuilder.Entity<IdentityRole<Guid>>().ToTable("roles");
-        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("utilisateur_roles");
-        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("utilisateur_claims");
-        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("utilisateur_logins");
-        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("utilisateur_tokens");
+        modelBuilder.Entity<IdentityUserRole<Guid>>().ToTable("compte_roles");
+        modelBuilder.Entity<IdentityUserClaim<Guid>>().ToTable("compte_claims");
+        modelBuilder.Entity<IdentityUserLogin<Guid>>().ToTable("compte_logins");
+        modelBuilder.Entity<IdentityUserToken<Guid>>().ToTable("compte_tokens");
         modelBuilder.Entity<IdentityRoleClaim<Guid>>().ToTable("role_claims");
 
         // Charge automatiquement toutes les classes IEntityTypeConfiguration<T>

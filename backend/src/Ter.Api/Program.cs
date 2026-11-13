@@ -24,6 +24,7 @@ builder.Services.AddBusinessServices();
 builder.Services.AddProblemDetails();
 
 var app = builder.Build();
+await DbInitializer.InitializeAsync(app.Services);
 
 app.UseExceptionHandler();
 app.UseAuthentication();
