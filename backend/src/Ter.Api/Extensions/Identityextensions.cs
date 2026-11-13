@@ -15,6 +15,14 @@ public static class IdentityExtensions
                 options.User.RequireUniqueEmail = true;
 
                 // Les règles de mot de passe (longueur, majuscule, chiffre, caractère spécial)
+                options.Password.RequiredLength = 12;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
+                options.Password.RequireNonAlphanumeric = true;
+
+
+            
             })
             .AddRoles<IdentityRole<Guid>>()
             .AddEntityFrameworkStores<AppDbContext>();
