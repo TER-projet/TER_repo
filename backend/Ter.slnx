@@ -3,7 +3,6 @@
     <Project Path="src/Ter.Api/Ter.Api.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Ter.Domain.Tests/Ter.Domain.Tests.csproj" />
     <Project Path="tests/Ter.Tests/Ter.Tests.csproj" />
   </Folder>
 </Solution>
