@@ -2,12 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-# On copie d'abord uniquement les .csproj pour profiter du cache Docker :
+# On copie d'abord le .csproj seul pour profiter du cache Docker :
 # le restore ne se relance que si les dépendances changent.
-COPY src/Ter.Domain/Ter.Domain.csproj                 src/Ter.Domain/
-COPY src/Ter.Application/Ter.Application.csproj       src/Ter.Application/
-COPY src/Ter.Infrastructure/Ter.Infrastructure.csproj src/Ter.Infrastructure/
-COPY src/Ter.Api/Ter.Api.csproj                       src/Ter.Api/
+COPY src/Ter.Api/Ter.Api.csproj src/Ter.Api/
 RUN dotnet restore src/Ter.Api/Ter.Api.csproj
 
 COPY src/ src/
