@@ -6,6 +6,7 @@
     <Project Path="src/Ter.Infrastructure/Ter.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Ter.Domain.Tests/Ter.Domain.Tests.csproj" />
     <Project Path="tests/Ter.Tests/Ter.Tests.csproj" />
   </Folder>
 </Solution>
