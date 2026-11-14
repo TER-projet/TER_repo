@@ -152,6 +152,89 @@ namespace Ter.Api.Data.Migrations
                     b.ToTable("compte_tokens", (string)null);
                 });
 
+            modelBuilder.Entity("Ter.Api.Models.Entities.Administrateur", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_administrateur");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CompteId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_compte");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("prenom");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompteId")
+                        .IsUnique();
+
+                    b.ToTable("administrateur", (string)null);
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Administrer", b =>
+                {
+                    b.Property<int>("AdministrateurId")
+                        .HasColumnType("integer")
+                        .HasColumnName("id_administrateur");
+
+                    b.Property<Guid>("CompteId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_compte");
+
+                    b.HasKey("AdministrateurId", "CompteId");
+
+                    b.HasIndex("CompteId");
+
+                    b.ToTable("administrer", (string)null);
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.AgentCrous", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_agent_crous");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CompteId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_compte");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("prenom");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompteId")
+                        .IsUnique();
+
+                    b.ToTable("agent_crous", (string)null);
+                });
+
             modelBuilder.Entity("Ter.Api.Models.Entities.AppUser", b =>
                 {
                     b.Property<Guid>("Id")
@@ -227,6 +310,118 @@ namespace Ter.Api.Data.Migrations
                     b.ToTable("comptes", (string)null);
                 });
 
+            modelBuilder.Entity("Ter.Api.Models.Entities.Etudiant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_etudiant");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Classe")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("classe");
+
+                    b.Property<Guid>("CompteId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_compte");
+
+                    b.Property<bool>("EstBoursier")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("boolean")
+                        .HasDefaultValue(false)
+                        .HasColumnName("est_boursier");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("prenom");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompteId")
+                        .IsUnique();
+
+                    b.ToTable("etudiant", (string)null);
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Personnel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_personnel");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CompteId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_compte");
+
+                    b.Property<string>("Fonction")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("fonction");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("prenom");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompteId")
+                        .IsUnique();
+
+                    b.ToTable("personnel", (string)null);
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Session", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id_session");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("CompteId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_compte");
+
+                    b.Property<DateTime>("DateDebut")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_debut")
+                        .HasDefaultValueSql("now()");
+
+                    b.Property<DateTime>("DateExpiration")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_expiration");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompteId");
+
+                    b.ToTable("session", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -276,6 +471,100 @@ namespace Ter.Api.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Administrateur", b =>
+                {
+                    b.HasOne("Ter.Api.Models.Entities.AppUser", "Compte")
+                        .WithOne("Administrateur")
+                        .HasForeignKey("Ter.Api.Models.Entities.Administrateur", "CompteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compte");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Administrer", b =>
+                {
+                    b.HasOne("Ter.Api.Models.Entities.Administrateur", "Administrateur")
+                        .WithMany("ComptesAdministres")
+                        .HasForeignKey("AdministrateurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Ter.Api.Models.Entities.AppUser", "Compte")
+                        .WithMany("AdministresPar")
+                        .HasForeignKey("CompteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Administrateur");
+
+                    b.Navigation("Compte");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.AgentCrous", b =>
+                {
+                    b.HasOne("Ter.Api.Models.Entities.AppUser", "Compte")
+                        .WithOne("AgentCrous")
+                        .HasForeignKey("Ter.Api.Models.Entities.AgentCrous", "CompteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compte");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Etudiant", b =>
+                {
+                    b.HasOne("Ter.Api.Models.Entities.AppUser", "Compte")
+                        .WithOne("Etudiant")
+                        .HasForeignKey("Ter.Api.Models.Entities.Etudiant", "CompteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compte");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Personnel", b =>
+                {
+                    b.HasOne("Ter.Api.Models.Entities.AppUser", "Compte")
+                        .WithOne("Personnel")
+                        .HasForeignKey("Ter.Api.Models.Entities.Personnel", "CompteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compte");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Session", b =>
+                {
+                    b.HasOne("Ter.Api.Models.Entities.AppUser", "Compte")
+                        .WithMany("Sessions")
+                        .HasForeignKey("CompteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Compte");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.Administrateur", b =>
+                {
+                    b.Navigation("ComptesAdministres");
+                });
+
+            modelBuilder.Entity("Ter.Api.Models.Entities.AppUser", b =>
+                {
+                    b.Navigation("Administrateur");
+
+                    b.Navigation("AdministresPar");
+
+                    b.Navigation("AgentCrous");
+
+                    b.Navigation("Etudiant");
+
+                    b.Navigation("Personnel");
+
+                    b.Navigation("Sessions");
                 });
 #pragma warning restore 612, 618
         }

@@ -14,4 +14,22 @@ public class AppUser : IdentityUser<Guid>
 
     /// <summary>État du compte (colonne : statut_compte).</summary>
     public StatutCompte Statut { get; set; } = StatutCompte.Actif;
+
+    /// <summary>Profil étudiant associé, s'il existe (one-to-one).</summary>
+    public Etudiant? Etudiant { get; set; }
+
+    /// <summary>Profil personnel associé, s'il existe (one-to-one).</summary>
+    public Personnel? Personnel { get; set; }
+
+    /// <summary>Profil agent du CROUS associé, s'il existe (one-to-one).</summary>
+    public AgentCrous? AgentCrous { get; set; }
+
+    /// <summary>Profil administrateur associé, s'il existe (one-to-one).</summary>
+    public Administrateur? Administrateur { get; set; }
+
+    /// <summary>Associations « administrer » : administrateurs qui gèrent ce compte (one-to-many).</summary>
+    public ICollection<Administrer> AdministresPar { get; set; } = new List<Administrer>();
+
+    /// <summary>Sessions de connexion du compte (one-to-many).</summary>
+    public ICollection<Session> Sessions { get; set; } = new List<Session>();
 }
