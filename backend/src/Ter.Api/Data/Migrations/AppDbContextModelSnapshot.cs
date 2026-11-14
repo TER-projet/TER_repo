@@ -227,6 +227,55 @@ namespace Ter.Api.Data.Migrations
                     b.ToTable("comptes", (string)null);
                 });
 
+            modelBuilder.Entity("Ter.Api.Models.Entities.PointDeVente", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id_point_de_vente");
+
+                    b.Property<string>("Adresse")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("adresse");
+
+                    b.Property<int?>("CapaciteAccueil")
+                        .HasColumnType("integer")
+                        .HasColumnName("capacite_accueil");
+
+                    b.Property<decimal?>("Latitude")
+                        .HasPrecision(9, 6)
+                        .HasColumnType("numeric(9,6)")
+                        .HasColumnName("latitude");
+
+                    b.Property<decimal?>("Longitude")
+                        .HasPrecision(9, 6)
+                        .HasColumnType("numeric(9,6)")
+                        .HasColumnName("longitude");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("nom");
+
+                    b.Property<string>("Statut")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("character varying(20)")
+                        .HasColumnName("statut");
+
+                    b.Property<string>("Telephone")
+                        .HasMaxLength(30)
+                        .HasColumnType("character varying(30)")
+                        .HasColumnName("telephone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("points_de_vente", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
