@@ -8,9 +8,13 @@ namespace Ter.Api.Data;
 public class AppDbContext(DbContextOptions<AppDbContext> options)
     : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>(options)
 {
-    // Ajoutez ici un DbSet par entité (une ligne par entité). Exemple :
-    // public DbSet<Article> Articles => Set<Article>();
-    //
+    // Ajoutez ici un DbSet par entité (une ligne par entité).
+    public DbSet<Etudiant> Etudiants => Set<Etudiant>();
+    public DbSet<Personnel> Personnels => Set<Personnel>();
+    public DbSet<AgentCrous> AgentsCrous => Set<AgentCrous>();
+    public DbSet<Session> Sessions => Set<Session>();
+    public DbSet<Administrateur> Administrateurs => Set<Administrateur>();
+    public DbSet<Administrer> Administrer => Set<Administrer>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
